@@ -1,0 +1,99 @@
+<!--
+    DO NOT CHANGE
+-->
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Mini Search Engine</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+body {
+  font-family: Arial;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: grey;
+  color: white;
+  text-align: center;
+}
+
+
+    </style>
+</head>
+<body>
+<h1>Elgoog</h1>
+<!-- Load icon library -->
+<img src="/image/search_icon.png" alt="Elgoog" style="width:128px;height:128px;">
+
+<form class="example" action="#" th:action="@{/search}" th:object="${searchKey}" method="post"
+      style="margin:auto;max-width:300px">
+    <input type="text" placeholder="Search.." name="search" th:field="*{phrase}">
+    <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+<section th:if="${hasResult}">
+    <br>
+    <br>
+    <br>
+    <hr>
+    <h3>Result</h3>
+    <div th:if="${emptyResult}">
+        <p th:text="${phrase} + ' not found in all documents'"/>
+    </div>
+    <div th:if="${!emptyResult}">
+        <p th:text="'Found: ' + ${phrase} + ' in document ' + ${searchResult}"/>
+        <br>
+        <p th:text="'My search took ' + ${searchTime} + ' nanoseconds.'"/>
+        <p th:text="'Naive search took ' + ${naiveSearchTime} + ' nanoseconds.'"/>
+    </div>
+    <div th:if="${!searchResultMatch}">
+        <br>
+        <b>SEARCH RESULT DOES NOT MATCH NAIVE SEARCH!</b>
+        <p th:text="'Naive search found: ' + ${phrase} + ' in document ' + ${naiveSearchResult}"/>
+    </div>
+</section>
+<div class="footer">
+    <p>UW Bothell CSS 143B, 2021 Spring</p>
+</div>
+</body>
+</html>

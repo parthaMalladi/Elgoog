@@ -1,0 +1,51 @@
+<!--
+    DO NOT CHANGE
+-->
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<html>
+<head>
+    <title>Mini Search Engine</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+    </style>
+</head>
+<body>
+<h2>Document</h2>
+<table class="center" style="text-align:center" border="1">
+    <tr>
+        <th style="text-align:center">Id</th>
+        <th>Document</th>
+    </tr>
+    <tr th:each="doc,iter : ${docs}">
+        <td style="text-align:center" th:text="${iter.index}"></td>
+        <td style="text-align:left" th:text="${doc}"></td>
+    </tr>
+</table>
+<br>
+<h2>Index</h2>
+<p th:utext=${index}></p>
+</body>
+</html>
